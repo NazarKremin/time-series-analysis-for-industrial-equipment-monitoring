@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { GraphState } from './graph-state/graph.service';
 
 @Injectable()
 export class AppService {
+  private static graphState = new GraphState<string>();
+
   static analyzeTimeSeries(signals: number[]) {
     for (let i = 0; i < signals.length; i++) {
       const previous = signals[i == 0 ? signals.length - 1 : i - 1];
@@ -15,7 +18,7 @@ export class AppService {
             : signals.lastIndexOf(8, signals.length);
 
         const duration = (endTime - startTime).toString();
-        graphState.addPattern(
+        this.graphState.addPattern(
           '289',
           startTime.toString(),
           endTime.toString(),
@@ -29,7 +32,7 @@ export class AppService {
             : signals.lastIndexOf(8, signals.length);
 
         const duration = (endTime - startTime).toString();
-        graphState.addPattern(
+        this.graphState.addPattern(
           '989',
           startTime.toString(),
           endTime.toString(),
@@ -43,7 +46,7 @@ export class AppService {
             : signals.lastIndexOf(8, signals.length);
 
         const duration = (endTime - startTime).toString();
-        graphState.addPattern(
+        this.graphState.addPattern(
           '282',
           startTime.toString(),
           endTime.toString(),
@@ -53,9 +56,9 @@ export class AppService {
     }
 
     return {
-      '289': graphState.nodes.get('289'),
-      '989': graphState.nodes.get('989'),
-      '282': graphState.nodes.get('282'),
+      '289': this.graphState.nodes.get('289'),
+      '989': this.graphState.nodes.get('989'),
+      '282': this.graphState.nodes.get('282'),
     };
   }
 
@@ -71,34 +74,3 @@ export class AppService {
     return matches;
   }
 }
-
-class GraphNode<T> {
-  pattern: T;
-  start: T;
-  stop: T;
-  duration: T;
-
-  constructor(pattern: T, start: T, stop: T, duration: T) {
-    this.pattern = pattern;
-    this.start = start;
-    this.stop = stop;
-    this.duration = duration;
-  }
-}
-
-export class GraphState<T> {
-  nodes: Map<T, GraphNode<T>>;
-
-  constructor() {
-    this.nodes = new Map();
-  }
-
-  addPattern(pattern: T, start: T, stop: T, duration: T) {
-    if (!this.nodes.has(pattern)) {
-      const newNode = new GraphNode(pattern, start, stop, duration);
-      this.nodes.set(pattern, newNode);
-    }
-  }
-}
-
-const graphState = new GraphState<string>();
