@@ -24,7 +24,7 @@ export class AppService {
           endTime.toString(),
           duration,
         );
-      } else if (previous === 9 && current === 8) {
+      } else if (previous === 9 && current === 8 && next === 9) {
         const startTime = signals.indexOf(current, i);
         const endTime =
           signals.lastIndexOf(9, signals.length) !== -1
