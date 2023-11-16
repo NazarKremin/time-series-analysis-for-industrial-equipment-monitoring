@@ -1,13 +1,13 @@
 ## Description
 Why Nest.js, Nest.js has a built-in structure to get started easily, also supports TypeScript right away, also has many features that are convenient for development and use, also easy to use for different types of architectures, strictly typed.
 
-What server will do after running, you can open postman or any instrument what can make api call.
-After starting the server, you can use this url, copy and paste in the terminal 
+<h5>What server will do after running.</h5>
+You can use this url, copy and paste in the terminal 
 1. curl -X POST -H "Content-Type: application/json" -d '{"signals": [2,2,2,2,8,8,8,8,8,8,9,9,9,9]}' http://localhost:3000/test  </br>
 2. curl -X POST -H "Content-Type: application/json" -d '{"signals": [2,8,9,2,2,8,8,8,8,8,8,9,9,9,9]}' http://localhost:3000/test/pattern  </br>
 </br>
-Or if you have postman: 
-you need to run open postman or any other tool that can make API calls. We have 2 endpoints:
+<h5>Or if you have postman or any instrument what can make api call.</h5>
+You need to run open postman or any other tool that can make API calls. We have 2 endpoints:
 1. http://localhost:3000/test is where the "industrial test" is checked, in the body of the request you insert the field </br>
 {
 "signals": [2,2,2,2,8,8,8,8,8,8,9,9,9,9]
